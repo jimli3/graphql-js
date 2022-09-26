@@ -3,12 +3,15 @@
   "version": "17.0.0-alpha.1",
   "description": "A Query Language and Runtime which can target any service.",
   "license": "MIT",
-  "private": true,
-  "type": "module",
   "typesVersions": {
     ">=4.4.0": {
       "*": [
         "*"
+      ]
+    },
+    "*": {
+      "*": [
+        "NotSupportedTSVersion.d.ts"
       ]
     }
   },
@@ -28,71 +31,9 @@
   "engines": {
     "node": "^14.19.0 || ^16.10.0 || >=18.0.0"
   },
-  "scripts": {
-    "preversion": ". ./resources/checkgit.sh && npm ci --ignore-scripts",
-    "version": "ts-node resources/gen-version.ts && npm test && git add src/version.ts",
-    "fuzzonly": "mocha --full-trace src/**/__tests__/**/*-fuzz.ts",
-    "changelog": "ts-node resources/gen-changelog.ts",
-    "benchmark": "ts-node resources/benchmark.ts",
-    "test": "npm run lint && npm run check && npm run testonly:cover && npm run prettier:check && npm run check:spelling && npm run check:integrations",
-    "lint": "eslint --cache --max-warnings 0 .",
-    "check": "tsc --pretty",
-    "testonly": "mocha --full-trace src/**/__tests__/**/*-test.ts",
-    "testonly:cover": "c8 npm run testonly",
-    "testonly:watch": "npm run testonly -- --watch",
-    "testonly:mutate": "stryker run",
-    "prettier": "prettier --cache --cache-strategy metadata --write --list-different .",
-    "prettier:check": "prettier --cache --cache-strategy metadata --check .",
-    "check:spelling": "cspell --cache --no-progress '**/*'",
-    "check:integrations": "mocha --full-trace resources/integration-test.ts",
-    "serve": "docusaurus serve --dir websiteDist/ --config website/docusaurus.config.cjs",
-    "start": "npm run build:website && npm run serve",
-    "build:website": "ts-node resources/build-docusaurus.ts",
-    "build:npm": "ts-node resources/build-npm.ts",
-    "build:deno": "ts-node resources/build-deno.ts",
-    "diff:npm": "ts-node resources/diff-npm-package.ts",
-    "gitpublish:npm": "bash ./resources/gitpublish.sh npm npmDist",
-    "gitpublish:deno": "bash ./resources/gitpublish.sh deno denoDist"
-  },
-  "devDependencies": {
-    "@docusaurus/core": "2.1.0",
-    "@docusaurus/preset-classic": "2.1.0",
-    "@mdx-js/react": "1.6.22",
-    "@stryker-mutator/core": "6.2.2",
-    "@stryker-mutator/mocha-runner": "6.2.2",
-    "@stryker-mutator/typescript-checker": "6.2.2",
-    "@svgr/webpack": "6.3.1",
-    "@types/chai": "4.3.3",
-    "@types/mocha": "9.1.1",
-    "@types/node": "18.7.18",
-    "@types/prettier": "2.7.0",
-    "@typescript-eslint/eslint-plugin": "5.37.0",
-    "@typescript-eslint/parser": "5.37.0",
-    "c8": "7.12.0",
-    "chai": "4.3.6",
-    "clsx": "1.2.1",
-    "cspell": "6.8.2",
-    "docusaurus-plugin-typedoc-api": "2.4.0",
-    "eslint": "8.23.1",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-internal-rules": "file:./resources/eslint-internal-rules",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-react": "7.31.8",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-simple-import-sort": "8.0.0",
-    "eslint-plugin-tsdoc": "0.2.17",
-    "file-loader": "6.2.0",
-    "mocha": "10.0.0",
-    "prettier": "2.7.1",
-    "prism-react-renderer": "1.3.5",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "ts-node": "10.9.1",
-    "typedoc": "0.23.14",
-    "typescript": "4.8.3",
-    "url-loader": "4.1.1"
-  },
   "publishConfig": {
     "tag": "alpha"
-  }
+  },
+  "main": "index",
+  "module": "index.mjs"
 }
